@@ -1,0 +1,76 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <th:block th:fragment="add-new-material">
+        <div id="mdCreateMaterial" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title text-purple" id="myLargeModalLabel">Thêm thức ăn</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="modal-alert-danger hide"></div>
+                        <form class="parsley-examples" id="frmCreMaterial" autocomplete="off">
+                            <div class="row mt-3">
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="materialNameCre">Tên loại thức ăn<span class="text-danger">*</span></label>
+                                    <input type="text" name="materialNameCre" parsley-trigger="change" placeholder="Ví dụ: Đồ ăn khô" required class="form-control" id="materialNameCre">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="materialContentCre">Hàm lượng dinh dưỡng thức ăn<span class="text-danger">*</span></label>
+                                    <input type="number" name="materialContentCre" parsley-trigger="change" required="" class="form-control" id="materialContentCre">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="quantityCre">Số lượng<span class="text-danger">*</span></label>
+                                    <input id="quantityCre" name="quantityCre" type="number" required="" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="pricePerUnitCre">Giá thức ăn (VND)<span class="text-danger">*</span></label>
+                                    <input type="number" name="pricePerUnitCre" required="" class="form-control" id="pricePerUnitCre">
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="productTypeCre">Loại thức ăn <span class="text-danger">*</span></label>
+                                    <select class="form-control" data-toggle="select2" id="productTypeCre" name="productTypeCre">
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="usageCre">Cách sử dụng</label>
+                                    <input type="text" name="usageCre" placeholder="Ví dụ: Phù hợp cho hamster mẹ đang cho con bú" class="form-control" id="usageCre">
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="productionDateCre">Ngày sản xuất <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="productionDateCre" type="date" name="productionDateCre" required>
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="expirationDateCre">Ngày hết hạn <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="expirationDateCre" type="date" name="expirationDateCre" required>
+                                </div>
+                                <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                    <label for="noteCre">Chú ý</label>
+                                    <input type="text" name="noteCre" class="form-control" id="noteCre">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                        <button id="btnCreMaterial" type="button" class="btn btn-purple waves-effect waves-light">Save</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </th:block>
+
+</html>

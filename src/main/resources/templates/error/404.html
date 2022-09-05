@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP Status 404</title>
+    <style>
+        body {
+            font-size: 1.4rem;
+        }
+        p {
+            line-height: 1.5;
+            margin: 0 0 1.25em 0;
+        }
+        #site-content {
+            display: block;
+            padding: 1rem 4rem 0 4rem;
+        }
+        .sans-excerpt {
+            word-wrap: break-word;
+        }
+        .go-home {
+            color: #69737D;
+            font-size: .95em;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .go-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="site-content">
+        <h1 th:text="${errorMsg}"></h1>
+        <p class="sans-excerpt">
+            Không thể tìm thấy trang bạn đang tìm. Nó có thể đã bị xóa, đổi tên hoặc có thể nó không tồn tại ngay từ đầu. Bạn có thể trở lại trang chủ thông qua liên kết.
+        </p>
+        <a class="go-home" href="/">Đến trang chủ →</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Log In / Sign Up</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+	<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+	<link href="/assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/assets/css/login.css">
+	<script src="/assets/js/jQuery/jquery-3.6.0.min.js"></script>
+	<link href="/assets/css/iziToast.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!--	<a href="#" class="logo" target="_blank">-->
+<!--		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">-->
+<!--	</a>-->
+
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Đăng nhập </span><span>Đăng ký</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reglog"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Đăng nhập</h4>
+
+											<form id="frmLogin">
+												<div class="form-group">
+													<input type="email" name="loginEmail" class="form-style" placeholder="Email" id="loginEmail" autocomplete="off">
+													<i class="input-icon uil uil-at"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" name="loginPassword" class="form-style" placeholder="Password" id="loginPassword" autocomplete="off">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+											</form>
+											<button id="btnLogin" class="btn mt-4">submit</button>
+
+										</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Đăng ký</h4>
+
+											<form id="frmRegister" autocomplete="off">
+												<div class="form-group mt-2">
+													<input type="email" name="usernameReg" class="form-style" placeholder="Email" id="usernameReg">
+													<i class="input-icon uil uil-at"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="password" name="passwordReg" class="form-style" placeholder="Password" id="passwordReg">
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="text" name="fullNameReg" class="form-style" placeholder="Họ và Tên" id="fullNameReg">
+													<i class="input-icon uil uil-user"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="text" name="phoneReg" class="form-style" placeholder="Số điện thoại" id="phoneReg">
+													<i class="input-icon uil uil-user"></i>
+												</div>
+												<div class="form-group mt-2">
+													<input type="text" name="addressReg" class="form-style" placeholder="Địa chỉ" id="addressReg">
+													<i class="input-icon uil uil-user"></i>
+												</div>
+												<div class="form-group mt-2">
+													<select class="form-style" id="roleOpts">
+														<option class="form-style" disabled>Chọn Role</option>
+
+													</select>
+													<i class="input-icon uil uil-lock-alt"></i>
+												</div>
+											</form>
+
+											<button id="btnRegister" class="btn mt-4">submit</button>
+										</div>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+	    </div>
+	</div>
+<!-- partial -->
+<th:block th:include="/material-management/temp_option :: temp_option"/>
+
+<script src="/assets/js/jQuery/jquery.validate.js"></script>
+<script src="/assets/js/notify/notify-0.4.1.min.js"></script>
+<script src="/assets/js/sweetAlert2/sweetalert2.min.js"></script>
+<script src="/assets/js/iziToast/iziToast.min.js"></script>
+<script src="/assets/js/apps.js"></script>
+
+<script>
+
+	let page = {
+		urls: {
+			register: App.BASE_URL_AUTH + "/register",
+			login: App.BASE_URL_AUTH + "/login",
+			getAllRoles: App.BASE_URL_ROLE
+		},
+		element: {},
+		loadData: {},
+		commands: {}
+	}
+
+	page.element.formLogin = $("#frmLogin");
+	page.element.formLoginInputs = $("#frmLogin input");
+	page.element.userLog = $("#loginEmail");
+	page.element.passLog = $("#loginPassword");
+
+
+	page.element.tempOption = $("#tempOption");
+	page.element.arrowCheckbox = $("#reg-log");
+
+	page.element.formRegister = $("#frmRegister");
+	page.element.formRegisterInputs = $("#frmRegister input");
+	page.element.userReg = $("#usernameReg");
+	page.element.passReg = $("#passwordReg");
+	page.element.nameReg = $("#fullNameReg");
+	page.element.phoneReg = $("#phoneReg");
+	page.element.addressReg = $("#addressReg");
+	page.element.roleOtps = $("#roleOpts");
+
+	page.element.btnLogin = $("#btnLogin");
+	page.element.btnRegister = $("#btnRegister");
+
+	let tempOption = $.validator.format($.trim(page.element.tempOption.val().toString()));
+
+
+	page.loadData.getAllRoles = () => {
+		return $.ajax({
+			type: "GET",
+			url: page.urls.getAllRoles
+		})
+		.done((data) => {
+			$.each(data, (i, item) => {
+				page.element.roleOtps.append($(tempOption(item.id, item.code)));
+			});
+		})
+		.fail(() => {
+			App.SweetAlert.showErrorAlert("không tìm thấy danh sách role!");
+		})
+	}
+
+	page.loadData.atLoginForm = () => {
+		page.element.formLogin.removeAttr("disabled");
+		page.element.formRegisterInputs.attr("disabled", "true");
+	}
+
+	page.loadData.atRegisterForm = () => {
+		page.element.formRegisterInputs.removeAttr("disabled");
+		page.element.formLoginInputs.attr("disabled", "true");
+	}
+
+	page.commands.login = () => {
+		let user = {
+			username: page.element.userLog.val(),
+			password: page.element.passLog.val()
+		}
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			url: page.urls.login,
+			data: JSON.stringify(user)
+		})
+		.done((resp) => {
+			console.log(resp);
+			$.notify("Đăng nhập thành công!", "success");
+
+			for (let role of resp.roles) {
+				if (role.authority == "USER") {
+					setTimeout(function () {
+						window.location.href = "/business";
+					}, 1000);
+					return;
+				}
+				setTimeout(function () {
+					window.location.href = "/materials";
+				}, 1000);
+			}
+		})
+		.fail( function() {
+			$.notify("Tài khoản hoặc mật khẩu không chính xác, vui lòng kiểm tra lại thông tin!", "error");
+		});
+	}
+
+
+
+	page.commands.register = () => {
+
+		let user = {
+			username: page.element.userReg.val().trim(),
+			password: page.element.passReg.val(),
+			fullName: page.element.nameReg.val().trim(),
+			phoneNumber: page.element.phoneReg.val().trim(),
+			address: page.element.addressReg.val().trim(),
+			role: {
+				id: page.element.roleOtps.val(),
+			}
+		}
+
+		$.ajax({
+			type: "POST",
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			url: page.urls.register,
+			data: JSON.stringify(user)
+		})
+		.done(() => {
+			$.notify("Đăng ký tài khoản thành công!", "success");
+		})
+		.fail( function(jqXHR) {
+			iziToast.destroy();
+			if (jqXHR.responseJSON) {
+				if (jqXHR.responseJSON.message) {
+					App.IziToast.showErrorAlert(jqXHR.responseJSON.message);
+				} else {
+					$.each( jqXHR.responseJSON, function( key, value ) {
+						App.IziToast.showErrorAlert(value);
+					});
+				}
+			} else {
+				$.notify("Đã xảy ra lỗi. Vui lòng thử lại", "error");
+			}
+		});
+	}
+
+	page.initializeControlEvent = () => {
+
+
+		page.element.btnLogin.on("click", function() {
+			page.commands.login();
+		});
+
+		page.element.btnRegister.on("click", function() {
+			page.commands.register();
+		});
+
+	}
+
+	$(function () {
+		page.loadData.getAllRoles();
+		page.initializeControlEvent();
+	});
+
+
+</script>
+</body>
+</html>

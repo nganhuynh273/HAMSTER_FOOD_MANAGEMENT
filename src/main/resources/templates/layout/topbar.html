@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <th:block th:fragment="topbar">
+        <div class="navbar-custom">
+            <th:block th:replace="/layout/topbar-left :: topbar-left"></th:block>            <!-- LOGO -->
+            <div class="logo-box">
+                <a href="/admin" class="logo text-center logo-light">
+                <span class="logo-lg">
+                    <h1 style="color: white">
+                        <span class="logo-md">
+                            <img src="/assets/images/logo-sm.png" alt="" height="20">
+                        </span>
+                        Obiquo
+                    </h1>
+                </span>
+                </a>
+            </div>
+            <!-- LOGO -->
+            <th:block th:replace="/layout/topbar-right :: topbar-right"></th:block>            <!-- LOGO -->
+        </div>
+    </th:block>
+
+</html>

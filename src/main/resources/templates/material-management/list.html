@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf‑8"/>
+<head>
+    <meta charset="UTF‑8" />
+    <meta http‑equiv="Content‑Type: text/html;charset=utf‑8" />
+    <title>Danh sách thức ăn</title>
+    <th:block th:replace="/layout/header :: header-p1"></th:block>
+    <!-- Notification css (Toast) -->
+    <link href="/assets/libs/toastr/css/iziToast.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/sweetalert2.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/libs/custombox/custombox.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css">
+
+    <script src="/assets/js/jQuery/jquery-3.6.0.min.js"></script>
+
+    <th:block th:replace="/layout/header :: header-p2"></th:block>
+
+
+    <script src="/assets/libs/toastr/js/iziToast.min.js"></script>
+    <script src="/assets/js/sweetAlert2/sweetalert2.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/topbar :: topbar"></th:block>
+    <!-- end Topbar --> <!-- ========== Left Sidebar Start ========== -->
+
+    <div class="left-side-menu">
+
+        <div class="slimscroll-menu">
+
+            <!--- Sidemenu -->
+            <div id="sidebar-menu">
+                <th:block th:replace="/layout/sidebar-left :: sidebar-left"></th:block>
+            </div>
+            <!-- End Sidebar -->
+
+            <div class="clearfix"></div>
+
+        </div>
+        <!-- Sidebar -left -->
+
+    </div>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body table-responsive">
+
+                                <div class="row mb-3">
+                                    <div class="col-md-9">
+                                        <h2 class="text-dark"><b>DANH SÁCH THỨC ĂN</b></h2>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div style="float: right">
+                                            <button id="btnCreateForm" class="btn btn-outline-purple">
+                                                <i class="fas fa-plus"></i>
+                                                <span> Thêm mới thức ăn</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="currentRow"/>
+
+                                <table id="datatable" class="table table-bordered dt-responsive nowrap tbMaterialList" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Tên thức ăn</th>
+                                            <th>Hàm lượng dinh dưỡng</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá thức ăn (VND)</th>
+<!--                                            <th>Loại thức ăn</th>-->
+<!--                                            <th>Cách sử dụng</th>-->
+                                            <th>Ngày sản xuất</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end container-fluid -->
+        </div>
+        <!-- end content -->
+
+        <!-- Footer Start -->
+        <th:block th:replace="/layout/footer :: footer"></th:block>
+        <!-- end Footer -->
+
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+</div>
+<th:block th:include="/material-management/temp_option :: temp_option"/>
+<th:block th:include="/material-management/temp_list_table :: temp_list_table_material"/>
+
+<th:block th:replace="/layout/modal/add-new-material :: add-new-material"></th:block>
+<th:block th:replace="/layout/modal/update-material :: update-material"></th:block>
+<!-- END wrapper -->
+
+<!-- Vendor js -->
+<script src="/assets/js/vendor.min.js"></script>
+
+<!-- Required datatable js -->
+<script src="/assets/libs/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Buttons examples -->
+<script src="/assets/libs/datatables/dataTables.buttons.min.js"></script>
+<script src="/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+<script src="/assets/libs/jszip/jszip.min.js"></script>
+<script src="/assets/libs/pdfmake/pdfmake.min.js"></script>
+<script src="/assets/libs/pdfmake/vfs_fonts.js"></script>
+<script src="/assets/libs/datatables/buttons.html5.min.js"></script>
+<script src="/assets/libs/datatables/buttons.print.min.js"></script>
+
+<!-- Responsive examples -->
+<script src="/assets/libs/datatables/dataTables.responsive.min.js"></script>
+<script src="/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+<script src="/assets/libs/datatables/dataTables.keyTable.min.js"></script>
+<script src="/assets/libs/datatables/dataTables.select.min.js"></script>
+
+<!-- Datatables init -->
+<!--<script src="/assets/js/pages/datatables.init.js"></script>-->
+
+<script src="/assets/libs/custombox/custombox.min.js"></script>
+
+<!-- App js -->
+<script src="/assets/js/app.min.js"></script>
+
+<script src="/assets/js/jQuery/jquery.validate.js"></script>
+
+<script src="/assets/js/custom-validation.js"></script>
+
+<script src="/assets/js/apps.js"></script>
+
+<script>
+    let page = {
+        urls: {
+            getAllMaterials: App.BASE_URL_MATERIAL,
+            getMaterialById: App.BASE_URL_MATERIAL + "/findMaterial",
+            getAllProductTypes: App.BASE_URL_PRODUCT_TYPE,
+            createNewMaterial: App.BASE_URL_MATERIAL + "/create",
+            updateMaterial: App.BASE_URL_MATERIAL + "/update",
+            removeMaterial: App.BASE_URL_MATERIAL + "/remove"
+        },
+        element: {},
+        loadData: {},
+        commands: {},
+        dialogs: {
+            element: {},
+            loadData: {},
+            commands: {},
+            close: {},
+            alertDanger: {},
+            inputError: {}
+        }
+    }
+
+    page.element.currentRow = $("#currentRow");
+    page.element.btnShowCreateForm = $("#btnCreateForm");
+    page.element.tempMaterial = $("#tempMaterial");
+    page.element.tbMaterialList = $(".tbMaterialList tbody");
+
+    page.dialogs.element.mdCreateMaterial = $("#mdCreateMaterial");
+    page.dialogs.element.mdUpdateMaterial = $("#mdUpdateMaterial");
+
+    page.dialogs.element.frmCreMaterial = $("#frmCreMaterial");
+    page.dialogs.element.frmUpMaterial = $("#frmUpMaterial");
+    page.dialogs.element.tempOption = $("#tempOption");
+
+    page.dialogs.element.materialNameCre = $("#materialNameCre");
+    page.dialogs.element.materialContentCre = $("#materialContentCre");
+    page.dialogs.element.quantityCre = $("#quantityCre");
+    page.dialogs.element.productTypeCre = $("#productTypeCre");
+    page.dialogs.element.usageCre = $("#usageCre");
+    page.dialogs.element.pricePerUnitCre = $("#pricePerUnitCre");
+    page.dialogs.element.productionDateCre = $("#productionDateCre");
+    page.dialogs.element.expirationDateCre = $("#expirationDateCre");
+    page.dialogs.element.noteCre = $("#noteCre");
+    page.dialogs.element.btnCreateMaterial = $("#btnCreMaterial");
+
+    page.dialogs.element.materialNameUp = $("#materialNameUp");
+    page.dialogs.element.materialContentUp = $("#materialContentUp");
+    page.dialogs.element.quantityUp = $("#quantityUp");
+    page.dialogs.element.productTypeUp = $("#productTypeUp");
+    page.dialogs.element.usageUp = $("#usageUp");
+    page.dialogs.element.pricePerUnitUp = $("#pricePerUnitUp");
+    page.dialogs.element.productionDateUp = $("#productionDateUp");
+    page.dialogs.element.expirationDateUp = $("#expirationDateUp");
+    page.dialogs.element.noteUp = $("#noteUp");
+    page.dialogs.element.btnUpdateMaterial = $("#btnUpMaterial");
+
+    page.dialogs.alertDanger.mdCreateMaterial = $("#mdCreateMaterial .modal-body .modal-alert-danger");
+    page.dialogs.alertDanger.mdUpdateMaterial = $("#mdUpdateMaterial .modal-body .modal-alert-danger");
+
+    let material = new Material();
+    let productType = new ProductType();
+
+    let tempMaterial = $.validator.format($.trim(page.element.tempMaterial.val().toString()));
+    let tempOption = $.validator.format($.trim(page.dialogs.element.tempOption.val().toString()));
+
+    page.loadData.getAllMaterials = () => {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllMaterials
+        })
+        .done((data) => {
+
+            $.each(data, (index, item) => {
+                material = item;
+                page.commands.addRow();
+            });
+
+        })
+        .fail(() => {
+            App.SweetAlert.showErrorAlert("Không tìm thấy danh sách thức ăn!");
+        })
+    };
+
+    page.commands.findMaterialById = (materialId) => {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getMaterialById + "/" + materialId
+        })
+        .done((data) => {
+            material = data;
+        })
+        .fail(() => {
+            App.SweetAlert.showErrorAlert("Không tìm thấy thức ăn!");
+        })
+    }
+
+    page.commands.addRow = () => {
+        page.element.tbMaterialList.prepend($(tempMaterial(material.id, material.materialName, material.materialContent, material.quantity, material.pricePerUnit, material.expirationDate)));
+    }
+
+    page.commands.updateRow = (data) => {
+        let currentRow = $("#tr_" + data.id);
+        let updatedRow = $(tempMaterial(data.id, data.materialName, data.materialContent, data.quantity, data.pricePerUnit, data.expirationDate));
+        currentRow.replaceWith(updatedRow);
+    }
+
+    page.commands.showCreateMaterialModal = () => {
+        page.dialogs.element.mdCreateMaterial.modal("show");
+    }
+
+    page.commands.hideCreateMaterialModal = () => {
+        page.dialogs.element.mdCreateMaterial.modal("hide");
+    }
+
+    page.commands.showUpdateMaterialModal = () => {
+        page.dialogs.element.mdUpdateMaterial.modal("show");
+    }
+
+    page.commands.hideUpdateMaterialModal = () => {
+        page.dialogs.element.mdUpdateMaterial.modal("hide");
+    }
+
+    page.commands.showRemoveMaterialModal = (materialId) => {
+        App.SweetAlert.showConfirmDialog(App.REMOVE_MATERIAL)
+            .then((result) => {
+                if (result.isConfirmed) {
+                    page.dialogs.commands.removeMaterial(materialId);
+                }
+            });
+    }
+
+    page.commands.handleBtnUpdateMaterial = () => {
+        $(document).on("click", ".btn-update-material", function() {
+            let id = $(this).data("id");
+            page.commands.findMaterialById(id).then(() => {
+                page.commands.showUpdateMaterialModal();
+                page.dialogs.element.materialNameUp.val(material.materialName);
+                page.dialogs.element.materialContentUp.val(material.materialContent);
+                page.dialogs.element.quantityUp.val(material.quantity);
+                page.dialogs.element.productTypeUp.val(material.productType.id);
+                page.dialogs.element.usageUp.val(material.materialUsage);
+                page.dialogs.element.pricePerUnitUp.val(material.pricePerUnit);
+                page.dialogs.element.productionDateUp.val(material.productionDate);
+                page.dialogs.element.expirationDateUp.val(material.expirationDate);
+                page.dialogs.element.noteUp.val(material.note);
+            });
+        });
+    }
+
+    page.commands.handleBtnRemoveMaterial = () => {
+        $(document).on("click", ".btn-remove-material", function() {
+            let id = $(this).data("id");
+            page.commands.findMaterialById(id).then(() => {
+                page.commands.showRemoveMaterialModal(id);
+            });
+        });
+    }
+
+    page.dialogs.commands.createNewMaterial = () => {
+
+        delete material.id;
+        material.materialName = page.dialogs.element.materialNameCre.val();
+        material.materialContent = page.dialogs.element.materialContentCre.val();
+        material.quantity = page.dialogs.element.quantityCre.val();
+        material.pricePerUnit = page.dialogs.element.pricePerUnitCre.val();
+        material.materialUsage = page.dialogs.element.usageCre.val();
+        material.productionDate = page.dialogs.element.productionDateCre.val();
+        material.expirationDate = page.dialogs.element.expirationDateCre.val();
+        material.note = page.dialogs.element.noteCre.val();
+        productType.id = page.dialogs.element.productTypeCre.val();
+        material.productType = productType;
+
+        page.dialogs.alertDanger.mdCreateMaterial.removeClass('show').addClass('hide').empty();
+
+        $.ajax({
+            type: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: page.urls.createNewMaterial,
+            data: JSON.stringify(material)
+        })
+        .done((data) => {
+            material = data;
+            page.commands.addRow();
+            App.SweetAlert.showSuccessAlert(App.SUCCESS_CREATED);
+            page.commands.hideCreateMaterialModal();
+        })
+        .fail((jqXHR) => {
+            let str='';
+
+            if (jqXHR.responseJSON) {
+                $.each(jqXHR.responseJSON, (key,value) => {
+                    str += `<label id="${key}-error" class="error" for="${key}Cre">${value}</label>`
+                })
+
+                page.dialogs.alertDanger.mdCreateMaterial.removeClass('hide').addClass('show').append(str);
+            }
+            else {
+                let str = `<label id="message-error" class="error">${jqXHR.responseText}</label>`
+                page.dialogs.alertDanger.mdCreateMaterial.removeClass('hide').addClass('show').append(str);
+            }
+        })
+
+    }
+
+    page.dialogs.commands.updateMaterial = () => {
+
+        material.materialName = page.dialogs.element.materialNameUp.val();
+        material.materialContent = page.dialogs.element.materialContentUp.val();
+        material.quantity = page.dialogs.element.quantityUp.val();
+        material.pricePerUnit = page.dialogs.element.pricePerUnitUp.val();
+        material.materialUsage = page.dialogs.element.usageUp.val();
+        material.productionDate = page.dialogs.element.productionDateUp.val();
+        material.expirationDate = page.dialogs.element.expirationDateUp.val();
+        material.note = page.dialogs.element.noteUp.val();
+        productType.id = page.dialogs.element.productTypeUp.val();
+        material.productType = productType;
+
+        page.dialogs.alertDanger.mdUpdateMaterial.removeClass('show').addClass('hide').empty();
+
+        $.ajax({
+            type: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: page.urls.updateMaterial,
+            data: JSON.stringify(material)
+        })
+        .done((data) => {
+            page.commands.updateRow(data);
+            App.SweetAlert.showSuccessAlert(App.SUCCESS_UPDATED);
+            page.commands.hideUpdateMaterialModal();
+        })
+        .fail((jqXHR) => {
+            let str='';
+            if (jqXHR.responseJSON) {
+                $.each(jqXHR.responseJSON, (key,value) => {
+                    str += `<label id="${key}-error" class="error" for="${key}Up">${value}</label>`
+                })
+                page.dialogs.alertDanger.mdUpdateMaterial.removeClass('hide').addClass('show').append(str);
+            }
+            else {
+                let str = `<label id="message-error" class="error">${jqXHR.responseText}</label>`
+                page.dialogs.alertDanger.mdUpdateMaterial.removeClass('hide').addClass('show').append(str);
+            }
+        })
+    };
+
+    page.dialogs.commands.removeMaterial = (id) => {
+        $.ajax({
+            type: "DELETE",
+            url: page.urls.removeMaterial + "/" + id
+        })
+        .done(() => {
+            App.SweetAlert.showSuccessAlert(App.SUCCESS_REMOVED);
+            $("#tr_" + id).remove();
+        })
+        .fail( (jQXHR) => {
+            App.SweetAlert.showErrorAlert(jQXHR.responseText);
+        });
+    }
+
+    page.dialogs.loadData.getAllProductTypes = () => {
+        return $.ajax({
+            type: "GET",
+            url: page.urls.getAllProductTypes
+        })
+        .done((data) => {
+            $.each(data, (i, item) => {
+                page.dialogs.element.productTypeCre.append($(tempOption(item.id, item.name)));
+            });
+            $.each(data, (i, item) => {
+                page.dialogs.element.productTypeUp.append($(tempOption(item.id, item.name)));
+            });
+        })
+        .fail(() => {
+            App.SweetAlert.showErrorAlert("Không tìm thấy danh sách loại thức ăn!");
+        })
+    }
+
+    page.dialogs.close.mdCreateMaterial = () => {
+        page.dialogs.alertDanger.mdCreateMaterial.empty();
+        page.dialogs.alertDanger.mdCreateMaterial.addClass("hide");
+        page.dialogs.alertDanger.mdCreateMaterial.removeClass("show");
+        page.dialogs.element.frmCreMaterial.find("input.error").removeClass("error");
+        page.dialogs.element.frmCreMaterial[0].reset();
+        page.dialogs.element.frmCreMaterial.validate().resetForm();
+    };
+
+    page.dialogs.close.mdUpdateMaterial = () => {
+        page.element.currentRow.val("");
+        page.dialogs.alertDanger.mdUpdateMaterial.empty();
+        page.dialogs.alertDanger.mdUpdateMaterial.addClass("hide");
+        page.dialogs.alertDanger.mdUpdateMaterial.removeClass("show");
+        page.dialogs.element.frmUpMaterial.find("input.error").removeClass("error");
+        page.dialogs.element.frmUpMaterial[0].reset();
+        page.dialogs.element.frmUpMaterial.validate().resetForm();
+    };
+
+    page.initializeControlEvent = () => {
+
+        page.element.btnShowCreateForm.on("click", () => {
+            page.commands.showCreateMaterialModal();
+        })
+
+        page.dialogs.element.btnCreateMaterial.on("click", () => {
+            page.dialogs.element.frmCreMaterial.submit();
+        })
+
+        page.dialogs.element.btnUpdateMaterial.on("click", () => {
+            page.dialogs.element.frmUpMaterial.submit();
+        })
+
+        page.dialogs.element.mdCreateMaterial.on("hidden.bs.modal", function () {
+            page.dialogs.close.mdCreateMaterial();
+        });
+
+        page.dialogs.element.mdUpdateMaterial.on("hidden.bs.modal", function () {
+            page.dialogs.close.mdUpdateMaterial();
+        });
+
+        page.commands.handleBtnUpdateMaterial();
+
+        page.commands.handleBtnRemoveMaterial();
+
+    }
+
+    $(function () {
+        page.loadData.getAllMaterials();
+        page.dialogs.loadData.getAllProductTypes();
+        page.initializeControlEvent();
+    });
+
+
+</script>
+</body>
+</html>
